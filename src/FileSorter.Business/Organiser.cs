@@ -13,7 +13,7 @@
         {
             await Parallel.ForEachAsync(files, async (file, token) =>
             {
-                var fileInfo = new FileInfo(file);
+                var fileInfo = new ReadonlyFileInfo(new FileInfo(file));
                 await Console.Out.WriteLineAsync($"Copying: '{fileInfo.Name}'. Size: '{fileInfo.Length}'.");
 
                 var folderDestination = _directoryManager.GetFolderDestination(destination, fileInfo);

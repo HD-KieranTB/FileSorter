@@ -2,7 +2,7 @@
 {
     public sealed class FileTypeDirectoryManager : IDirectoryManager
     {
-        public string GetFolderDestination(string destination, FileInfo fileInfo)
+        public string GetFolderDestination(string destination, IReadonlyFileInfo fileInfo)
         {
             var folder = "Other";
             if (ExtensionTypes.IMAGE_EXTENSIONS.Contains(fileInfo.Extension))
@@ -29,7 +29,7 @@
             return Path.Combine(destination, folder);
         }
 
-        public string GetNewFileName(string folderDestination, FileInfo fileInfo)
+        public string GetNewFileName(string folderDestination, IReadonlyFileInfo fileInfo)
         {
             return Path.Combine(folderDestination, Path.GetFileName(fileInfo.FullName));
         }

@@ -4,7 +4,7 @@ namespace FileSorter.Business
 {
     public sealed class XboxDirectoryManager : IDirectoryManager
     {
-        public string GetFolderDestination(string destination, FileInfo fileInfo)
+        public string GetFolderDestination(string destination, IReadonlyFileInfo fileInfo)
         {
             var gameAndDate = fileInfo.Name.Split('-');
 
@@ -20,7 +20,7 @@ namespace FileSorter.Business
             return Path.Combine(destination, combined);
         }
 
-        public string GetNewFileName(string folderDestination, FileInfo fileInfo)
+        public string GetNewFileName(string folderDestination, IReadonlyFileInfo fileInfo)
         {
             return Path.Combine(folderDestination, Path.GetFileName(fileInfo.FullName));
         }
