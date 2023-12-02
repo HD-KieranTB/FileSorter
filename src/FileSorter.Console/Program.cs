@@ -1,20 +1,55 @@
 ﻿using FileSorter.Business;
 
+var strategies = new Dictionary<char, IDirectoryManager> 
+{ 
+    { '1', new DateTimeDirectoryManager() },
+    { '2', new AlphabetDirectoryManager() },
+    { '3', new FileTypeDirectoryManager() },
+    { '4', new FileExtensionDirectoryManager() },
+    { '5', new XboxDirectoryManager() }
+};
+
 Console.WriteLine("Starting...");
 
-Console.WriteLine("Enter in the source directory.");
-var source = Console.ReadLine();
-Console.WriteLine("Enter in the destination directory.");
-var destination = Console.ReadLine();
+var menu =
+@"Select a sorting strategy (1, 2, 3, 4, 5):
+ 1 --> DateTimeDirectoryManager
+ 2 --> AlphabetDirectoryManager
+ 3 --> FileTypeDirectoryManager
+ 4 --> FileExtensionDirectoryManager
+ 5 --> XboxDirectoryManager";
 
-ArgumentException.ThrowIfNullOrEmpty(source);
-ArgumentException.ThrowIfNullOrEmpty(destination);
+Console.WriteLine(menu);
 
-var files = Directory.GetFiles(source, "*.*", SearchOption.AllDirectories);
+var showMenu = true;
+while (showMenu)
+{
+    showMenu = await Sort();
+}
 
-FileDirectory.CreateDirectoryIfNew(destination);
-var organiser = new Organiser(new FileExtensionDirectoryManager());
-await organiser.Organise(files, destination);
+async Task<bool> Sort()
+{
+    var strategyKey = Console.ReadKey();
+    if (strategies.TryGetValue(strategyKey.KeyChar, out IDirectoryManager? strategy))
+    {
+        Console.WriteLine("\nEnter in the source directory:");
+        var source = Console.ReadLine();
+        Console.WriteLine("\nEnter in the destination directory:");
+        var destination = Console.ReadLine();
+
+        ArgumentException.ThrowIfNullOrEmpty(source);
+        ArgumentException.ThrowIfNullOrEmpty(destination);
+
+        var files = Directory.GetFiles(source, "*.*", SearchOption.AllDirectories);
+
+        FileDirectory.CreateDirectoryIfNew(destination);
+        var organiser = new Organiser(strategy);
+        await organiser.Organise(files, destination);
+        return false;
+    }
+    Console.WriteLine(" Invalid selection.");
+    return true;
+}
 
 Console.WriteLine("Completed.");
 Console.ReadLine();
