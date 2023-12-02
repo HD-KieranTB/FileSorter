@@ -15,7 +15,7 @@ Consider the following directory and files:
   │ 
   └── BFileThree.pdf (11/20/2022)
 
-Sort the files by the date and time they were last edited using the DateTimeDirectoryManager.
+<strong>Sort the files by the date and time they were last edited using the DateTimeDirectoryManager.</strong>
 
   Files
   ├── 2022
@@ -25,7 +25,7 @@ Sort the files by the date and time they were last edited using the DateTimeDire
       ├── 14 Nov 2023 [BFileTwo].mp3 
       └── 24 Dec 2023 [AFileOne].jpg        
 
-Sort the files into alphabetical folders using the AlphabetDirectoryManager.
+<strong>Sort the files into alphabetical folders using the AlphabetDirectoryManager.</strong>
 
   Files
   ├── A
@@ -34,6 +34,30 @@ Sort the files into alphabetical folders using the AlphabetDirectoryManager.
   └── B
       ├── BFileThree.pdf
       └── BFileTwo.mp3   
+
+<strong>Sort the files into folders by category using the FileTypeDirectoryManager.</strong>
+
+  Files
+  ├── Images
+  │   └── AFileOne.jpg
+  │ 
+  ├── Sounds
+  │   └── BFileTwo.mp3   
+  │ 
+  └── Documents
+      └── BFileThree.pdf
+
+<strong>Sort the files into folders by extension type using the FileExtensionDirectoryManager.</strong>
+
+  Files
+  ├── jpg
+  │   └── AFileOne.jpg
+  │ 
+  ├── mp3
+  │   └── BFileTwo.mp3   
+  │ 
+  └── pdf
+      └── BFileThree.pdf
 
 Consider the following directory and files:
 
@@ -45,7 +69,7 @@ Consider the following directory and files:
       ├── Battlefield™ 1-2016_10_26-13_59_27.jpg
       └── ARK_Survival Evolved-2016_01_16-21_19_42.jpg  
 
-Sort files originating from xbox using the XboxDirectoryManager.
+<strong>Sort files originating from xbox using the XboxDirectoryManager.</strong>
 
 Files
   ├── Battlefield
