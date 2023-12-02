@@ -4,8 +4,6 @@ namespace FileSorter.Business
 {
     public sealed class XboxDirectoryManager : IDirectoryManager
     {
-        private static readonly string[] _imageExtensions = [".png", ".jpg"];
-
         public string GetFolderDestination(string destination, FileInfo fileInfo)
         {
             var gameAndDate = fileInfo.Name.Split('-');
@@ -14,7 +12,7 @@ namespace FileSorter.Business
             gamePart = Regex.Replace(gamePart, @"\s+", " ");
 
             var subFolder = "Clips";
-            if (_imageExtensions.Contains(fileInfo.Extension))
+            if (ExtensionTypes.IMAGE_EXTENSIONS.Contains(fileInfo.Extension))
             {
                 subFolder = "Screenshots";
             }

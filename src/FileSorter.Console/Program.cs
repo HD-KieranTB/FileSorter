@@ -13,8 +13,11 @@ ArgumentException.ThrowIfNullOrEmpty(destination);
 var files = Directory.GetFiles(source, "*.*", SearchOption.AllDirectories);
 
 FileDirectory.CreateDirectoryIfNew(destination);
-var organiser = new Organiser(new XboxDirectoryManager());
+var organiser = new Organiser(new FileTypeDirectoryManager());
 await organiser.Organise(files, destination);
 
 Console.WriteLine("Completed.");
 Console.ReadLine();
+
+// TODO:
+// File Extension Directory Manager (jpg, png, mp4 etc)
