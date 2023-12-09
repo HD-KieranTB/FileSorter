@@ -1,16 +1,17 @@
 ﻿namespace FileSorter.Business
 {
-    public sealed class DateTimeDirectoryManager : IDirectoryManager
+    public sealed class FileExtensionDirectoryManager : IDirectoryManager
     {
         public string GetFolderDestination(string destination, IReadonlyFileInfo fileInfo)
         {
-            var folder = fileInfo.LastWriteTime.Year.ToString();
+            var folder = fileInfo.Extension[1..];
+
             return Path.Combine(destination, folder);
         }
 
         public string GetNewFileName(string folderDestination, IReadonlyFileInfo fileInfo)
         {
-            return Path.Combine(folderDestination, $"{fileInfo.LastWriteTime:dd MMM yyyy HHmmss} [{fileInfo.Name}]{fileInfo.Extension}");
+            return Path.Combine(folderDestination, Path.GetFileName(fileInfo.FullName));
         }
     }
 }
