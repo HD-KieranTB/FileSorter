@@ -1,10 +1,11 @@
-<h1 align="center">FileSorter</h1>
+<h1 align="center">File Sorter</h1>
 <h3 align="center">The Free Software File Sorter</h3>
 
-FileSorter provides various strategies for automatically sorting files
+File Sorter provides various strategies for automatically sorting files
 
 <h4 align="center">Current use cases</h3>
 
+```bash
 Consider the following directory and files:
 
  Files
@@ -81,3 +82,5 @@ Files
   └── ARK Survival Evolved
       └── Screenshots
           └── ARK_Survival Evolved-2016_01_16-21_19_42.jpg
+
+```
