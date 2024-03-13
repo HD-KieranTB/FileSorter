@@ -5,6 +5,12 @@ File Sorter provides various strategies for automatically sorting files
 
 <h4 align="center">Current use cases</h3>
 
+ * [Files](./Files)
+   * [Photos](./Photos)
+     * [AFileOne.jpg](./Files/Photos/AFileOne.jpg)
+   * [BFileTwo.mp3](./Files/BFileTwo.mp3)
+   * [BFileThree.pdf](./Files/BFileThree.pdf)
+
 ```bash
 Consider the following directory and files:
 
