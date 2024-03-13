@@ -44,7 +44,7 @@ async Task<bool> Sort()
         var files = Directory.GetFiles(source, "*.*", SearchOption.AllDirectories);
 
         FileDirectory.CreateDirectoryIfNew(destination);
-        var organiser = new Organiser(strategy);
+        var organiser = new DirectoryOrganiser(strategy);
         await organiser.Organise(files, destination);
         return false;
     }

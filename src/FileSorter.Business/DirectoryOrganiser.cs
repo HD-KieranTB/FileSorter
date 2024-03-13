@@ -2,11 +2,11 @@
 
 namespace FileSorter.Business
 {
-    public class Organiser
+    public class DirectoryOrganiser
     {
         private readonly IDirectoryManager _directoryManager;
 
-        public Organiser(IDirectoryManager directoryManager)
+        public DirectoryOrganiser(IDirectoryManager directoryManager)
         {
             _directoryManager = directoryManager;
         }
