@@ -1,7 +1,8 @@
 using FileSorter.Business;
+using FileSorter.Business.DirectoryManagers;
 using NSubstitute;
 
-namespace FileSorter.UnitTest
+namespace FileSorter.UnitTest.DirectoryManagers
 {
     public sealed class AlphabetDirectoryManagerTests
     {

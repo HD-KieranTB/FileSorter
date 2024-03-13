@@ -1,4 +1,6 @@
-﻿namespace FileSorter.Business
+﻿using FileSorter.Business.DirectoryManagers;
+
+namespace FileSorter.Business
 {
     public class Organiser
     {

@@ -1,4 +1,5 @@
 ﻿using FileSorter.Business;
+using FileSorter.Business.DirectoryManagers;
 
 var strategies = new Dictionary<char, IDirectoryManager> 
 { 

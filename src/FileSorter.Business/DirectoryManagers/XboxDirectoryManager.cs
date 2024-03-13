@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace FileSorter.Business
+namespace FileSorter.Business.DirectoryManagers
 {
     public sealed class XboxDirectoryManager : IDirectoryManager
     {
