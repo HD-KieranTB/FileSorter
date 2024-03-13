@@ -5,15 +5,9 @@ File Sorter provides various strategies for automatically sorting files
 
 <h4 align="center">Current use cases</h3>
 
- * [Files](./Files)
-   * [Photos](./Photos)
-     * [AFileOne.jpg](./Files/Photos/AFileOne.jpg)
-   * [BFileTwo.mp3](./Files/BFileTwo.mp3)
-   * [BFileThree.pdf](./Files/BFileThree.pdf)
-
-```bash
 Consider the following directory and files:
 
+```bash
  Files
   ├── Photos
   │   └── AFileOne.jpg (12/24/2023)
@@ -21,9 +15,11 @@ Consider the following directory and files:
   ├── BFileTwo.mp3 (11/14/2023)
   │ 
   └── BFileThree.pdf (11/20/2022)
+```
 
 <strong>Sort the files by the date and time they were last edited using the DateTimeDirectoryManager.</strong>
 
+```bash
   Files
   ├── 2022
   │   └── 20 Nov 2022 [BFileThree].pdf
@@ -31,9 +27,11 @@ Consider the following directory and files:
   └── 2023
       ├── 14 Nov 2023 [BFileTwo].mp3 
       └── 24 Dec 2023 [AFileOne].jpg        
+```
 
 <strong>Sort the files into alphabetical folders using the AlphabetDirectoryManager.</strong>
 
+```bash
   Files
   ├── A
   │   └── AFileOne.jpg
@@ -41,9 +39,11 @@ Consider the following directory and files:
   └── B
       ├── BFileThree.pdf
       └── BFileTwo.mp3   
+```
 
 <strong>Sort the files into folders by category using the FileTypeDirectoryManager.</strong>
 
+```bash
   Files
   ├── Images
   │   └── AFileOne.jpg
@@ -53,9 +53,11 @@ Consider the following directory and files:
   │ 
   └── Documents
       └── BFileThree.pdf
+```
 
 <strong>Sort the files into folders by extension type using the FileExtensionDirectoryManager.</strong>
 
+```bash
   Files
   ├── jpg
   │   └── AFileOne.jpg
@@ -65,9 +67,11 @@ Consider the following directory and files:
   │ 
   └── pdf
       └── BFileThree.pdf
+```
 
 Consider the following directory and files:
 
+```bash
   Files
   ├── Xbox Game DVR
   │   └── Battlefield™ 1-2016_10_26-13_59_27.mp4
@@ -75,9 +79,11 @@ Consider the following directory and files:
   └── Xbox Screenshots
       ├── Battlefield™ 1-2016_10_26-13_59_27.jpg
       └── ARK_Survival Evolved-2016_01_16-21_19_42.jpg  
+```
 
 <strong>Sort files originating from xbox using the XboxDirectoryManager.</strong>
 
+```bash
 Files
   ├── Battlefield
   │   ├── Clips
@@ -88,5 +94,4 @@ Files
   └── ARK Survival Evolved
       └── Screenshots
           └── ARK_Survival Evolved-2016_01_16-21_19_42.jpg
-
 ```
