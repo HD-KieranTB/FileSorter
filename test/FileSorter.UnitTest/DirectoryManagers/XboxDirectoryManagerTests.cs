@@ -12,6 +12,7 @@ namespace FileSorter.UnitTest.DirectoryManagers
 
         [TestCase("FileA", ".jpg", "", "FileA\\Screenshots")]
         [TestCase("GameA-FileA", ".jpg", "", "GameA\\Screenshots")]
+        [TestCase("GameA-FileA", ".JPG", "", "GameA\\Screenshots")]
         [TestCase("GameA-FileB", ".mp4", "Files", "Files\\GameA\\Clips")]
         public void GetFolderDestination(string fileName, string extension, string destination, string expected)
         {

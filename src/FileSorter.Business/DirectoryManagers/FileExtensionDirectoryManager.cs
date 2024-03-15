@@ -6,7 +6,7 @@
         {
             var folder = fileInfo.Extension[1..];
 
-            return Path.Combine(destination, folder);
+            return Path.Combine(destination, folder.ToLower());
         }
 
         public string GetNewFileName(string folderDestination, IReadonlyFileInfo fileInfo)

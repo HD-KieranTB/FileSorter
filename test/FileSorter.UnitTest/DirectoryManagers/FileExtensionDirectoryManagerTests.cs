@@ -11,6 +11,7 @@ namespace FileSorter.UnitTest.DirectoryManagers
         }
 
         [TestCase(".pdf", "", "pdf")]
+        [TestCase(".PDF", "", "pdf")]
         [TestCase(".jpg", "Files", "Files\\jpg")]
         public void GetFolderDestination(string extension, string destination, string expected)
         {

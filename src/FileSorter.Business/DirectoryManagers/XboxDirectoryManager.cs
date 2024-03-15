@@ -12,7 +12,7 @@ namespace FileSorter.Business.DirectoryManagers
             gamePart = Regex.Replace(gamePart, @"\s+", " ");
 
             var subFolder = "Clips";
-            if (ExtensionTypes.IMAGE_EXTENSIONS.Contains(fileInfo.Extension))
+            if (ExtensionTypes.IMAGE_EXTENSIONS.Contains(fileInfo.Extension.ToLower()))
             {
                 subFolder = "Screenshots";
             }
