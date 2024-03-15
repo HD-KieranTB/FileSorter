@@ -1,10 +1,6 @@
-using FileSorter.Business;
-using FileSorter.Business.DirectoryManagers;
-using NSubstitute;
-
 namespace FileSorter.UnitTest.DirectoryManagers
 {
-    public sealed class DateTimeDirectoryManagerTests
+    internal sealed class DateTimeDirectoryManagerTests
     {
         private DateTimeDirectoryManager _directoryManager = null!;
 

@@ -1,10 +1,6 @@
-using FileSorter.Business;
-using FileSorter.Business.DirectoryManagers;
-using NSubstitute;
-
 namespace FileSorter.UnitTest.DirectoryManagers
 {
-    public sealed class AlphabetDirectoryManagerTests
+    internal sealed class AlphabetDirectoryManagerTests
     {
         private AlphabetDirectoryManager _directoryManager = null!;
 

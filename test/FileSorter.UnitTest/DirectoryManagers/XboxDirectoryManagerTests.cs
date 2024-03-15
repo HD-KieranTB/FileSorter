@@ -1,10 +1,6 @@
-using FileSorter.Business;
-using FileSorter.Business.DirectoryManagers;
-using NSubstitute;
-
 namespace FileSorter.UnitTest.DirectoryManagers
 {
-    public sealed class XboxDirectoryManagerTests
+    internal sealed class XboxDirectoryManagerTests
     {
         private XboxDirectoryManager _directoryManager = null!;
 

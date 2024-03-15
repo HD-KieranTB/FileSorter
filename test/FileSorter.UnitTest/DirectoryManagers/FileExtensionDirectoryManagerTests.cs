@@ -1,10 +1,6 @@
-using FileSorter.Business;
-using FileSorter.Business.DirectoryManagers;
-using NSubstitute;
-
 namespace FileSorter.UnitTest.DirectoryManagers
 {
-    public sealed class FileExtensionDirectoryManagerTests
+    internal sealed class FileExtensionDirectoryManagerTests
     {
         private FileExtensionDirectoryManager _directoryManager = null!;
 
