@@ -28,12 +28,12 @@ namespace FileSorter.UnitTest.DirectoryManagers
 
         [TestCase("FileNameA", "", "FileNameA")]
         [TestCase("FileNameB", "Files\\pdf", "Files\\pdf\\FileNameB")]
-        public void GetNewFileName(string fileName, string destination, string expected)
+        public void GetNewFileName(string fileName, string folderDestination, string expected)
         {
             var fileInfo = Substitute.For<IReadonlyFileInfo>();
             fileInfo.FullName.Returns(fileName);
 
-            var actual = _directoryManager.GetNewFileName(destination, fileInfo);
+            var actual = _directoryManager.GetNewFileName(folderDestination, fileInfo);
 
             Assert.That(actual, Is.EqualTo(expected));
         }

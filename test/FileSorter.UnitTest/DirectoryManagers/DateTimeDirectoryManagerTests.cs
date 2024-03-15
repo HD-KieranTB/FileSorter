@@ -29,7 +29,7 @@ namespace FileSorter.UnitTest.DirectoryManagers
 
         [TestCase(1988, 5, 7, "FileNameA", ".pdf", "", "07 May 1988 000000 [FileNameA].pdf")]
         [TestCase(2023, 12, 31, "FileNameB", ".pdf", "Files", "Files\\31 Dec 2023 000000 [FileNameB].pdf")]
-        public void GetNewFileName(int year, int month, int day, string fileName, string extension, string destination, string expected)
+        public void GetNewFileName(int year, int month, int day, string fileName, string extension, string folderDestination, string expected)
         {
             var date = new DateTime(year, month, day);
             var fileInfo = Substitute.For<IReadonlyFileInfo>();
@@ -37,7 +37,7 @@ namespace FileSorter.UnitTest.DirectoryManagers
             fileInfo.Name.Returns(fileName);
             fileInfo.Extension.Returns(extension);
 
-            var actual = _directoryManager.GetNewFileName(destination, fileInfo);
+            var actual = _directoryManager.GetNewFileName(folderDestination, fileInfo);
 
             Assert.That(actual, Is.EqualTo(expected));
         }
