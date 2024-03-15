@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace FileSorter.Business
+namespace FileSorter.Business.DirectoryManagers
 {
     public sealed class XboxDirectoryManager : IDirectoryManager
     {
@@ -12,7 +12,7 @@ namespace FileSorter.Business
             gamePart = Regex.Replace(gamePart, @"\s+", " ");
 
             var subFolder = "Clips";
-            if (ExtensionTypes.IMAGE_EXTENSIONS.Contains(fileInfo.Extension))
+            if (ExtensionTypes.IMAGE_EXTENSIONS.Contains(fileInfo.Extension.ToLower()))
             {
                 subFolder = "Screenshots";
             }

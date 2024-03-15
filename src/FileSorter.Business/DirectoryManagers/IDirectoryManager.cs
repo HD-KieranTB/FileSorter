@@ -1,4 +1,4 @@
-﻿namespace FileSorter.Business
+﻿namespace FileSorter.Business.DirectoryManagers
 {
     public interface IDirectoryManager
     {

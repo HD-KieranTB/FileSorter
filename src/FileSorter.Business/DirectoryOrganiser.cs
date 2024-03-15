@@ -1,12 +1,16 @@
-﻿namespace FileSorter.Business
+﻿using FileSorter.Business.DirectoryManagers;
+
+namespace FileSorter.Business
 {
-    public class Organiser
+    public class DirectoryOrganiser
     {
         private readonly IDirectoryManager _directoryManager;
+        private readonly IStreamFactory _streamFactory;
 
-        public Organiser(IDirectoryManager directoryManager)
+        public DirectoryOrganiser(IDirectoryManager directoryManager, IStreamFactory streamFactory)
         {
             _directoryManager = directoryManager;
+            _streamFactory = streamFactory;
         }
 
         public async Task Organise(string[] files, string destination)
@@ -26,9 +30,10 @@
 
                 FileDirectory.CreateDirectoryIfNew(folderDestination);
 
-                using var sourceStream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 4096, useAsync: true);
-                using var destinationStream = new FileStream(newName, FileMode.CreateNew, FileAccess.Write, FileShare.None, bufferSize: 4096, useAsync: true);
-                await sourceStream.CopyToAsync(destinationStream, token);
+                using var sourceStream = _streamFactory.CreateSourceStream(file);
+                    using var destinationStream = _streamFactory.CreateDestinationStream(newName);
+                        await sourceStream.CopyToAsync(destinationStream, token);
+
                 await Console.Out.WriteLineAsync($"Finished copying: '{fileInfo.Name}'. Size: '{fileInfo.Length}'.");
             });
         }

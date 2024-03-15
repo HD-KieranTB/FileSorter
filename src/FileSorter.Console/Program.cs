@@ -1,4 +1,5 @@
 ﻿using FileSorter.Business;
+using FileSorter.Business.DirectoryManagers;
 
 var strategies = new Dictionary<char, IDirectoryManager> 
 { 
@@ -43,7 +44,7 @@ async Task<bool> Sort()
         var files = Directory.GetFiles(source, "*.*", SearchOption.AllDirectories);
 
         FileDirectory.CreateDirectoryIfNew(destination);
-        var organiser = new Organiser(strategy);
+        var organiser = new DirectoryOrganiser(strategy, new FileStreamFactory());
         await organiser.Organise(files, destination);
         return false;
     }
