@@ -27,10 +27,12 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-    - uses: actions/upload-artifact@main
+    - name: Upload artifacts
+      uses: actions/upload-artifact@main
       with:
-        name: Create build artifacts
-        path: public/      
+        name: Artifacts
+        path: build
+        if-no-files-found: error
 
   test:
     runs-on: ${{ matrix.operating-system }}
@@ -44,7 +46,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@main
         with:
-          name: Create build artifacts
-          path: public
+          name: Artifacts
+          path: .
       - name: Test
         run: dotnet test --no-build --verbosity normal
