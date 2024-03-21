@@ -37,7 +37,7 @@ jobs:
     
     strategy:
       matrix:
-        operating-system: [ubuntu-latest, windows-latest]    
+        operating-system: [ubuntu-latest, windows-latest, macos-latest]    
 
     steps:
       - name: Download build artifact
