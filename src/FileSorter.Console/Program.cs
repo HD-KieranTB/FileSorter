@@ -4,7 +4,7 @@ using FileSorter.Business.DirectoryManagers;
 var strategies = new Dictionary<char, IDirectoryManager> 
 { 
     { '1', new DateTimeDirectoryManager() },
-    { '2', new AlphabetDirectoryManager() },
+    { '2', new AlphabetDirectoryManager(new CrossPlatformPath()) },
     { '3', new FileTypeDirectoryManager() },
     { '4', new FileExtensionDirectoryManager() },
     { '5', new XboxDirectoryManager() }

@@ -7,7 +7,7 @@ namespace FileSorter.UnitTest.DirectoryManagers
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _directoryManager = new AlphabetDirectoryManager();
+            _directoryManager = new AlphabetDirectoryManager(new CrossPlatformPath());
         }
 
         [TestCase("Alphabet", "", "A")]
@@ -15,11 +15,11 @@ namespace FileSorter.UnitTest.DirectoryManagers
         [TestCase("*abc", "", "Other")]
         [TestCase("_", "", "Other")]
         [TestCase("999", "", "Other")]
-        [TestCase("Alphabet", "Files", "Files\\A")]
-        [TestCase("alphabet", "Files", "Files\\A")]
-        [TestCase("*abc", "Files", "Files\\Other")]
-        [TestCase("_", "Files", "Files\\Other")]
-        [TestCase("999", "Files", "Files\\Other")]
+        [TestCase("Alphabet", "Files", "Files/A")]
+        [TestCase("alphabet", "Files", "Files/A")]
+        [TestCase("*abc", "Files", "Files/Other")]
+        [TestCase("_", "Files", "Files/Other")]
+        [TestCase("999", "Files", "Files/Other")]
         public void GetFolderDestination(string fileName, string destination, string expected)
         {
             var fileInfo = Substitute.For<IReadonlyFileInfo>();
@@ -31,7 +31,7 @@ namespace FileSorter.UnitTest.DirectoryManagers
         }
 
         [TestCase("Alphabet", "", "Alphabet 01 Jan 0001 000000")]
-        [TestCase("Alphabet", "Files", "Files\\Alphabet 01 Jan 0001 000000")]
+        [TestCase("Alphabet", "Files", "Files/Alphabet 01 Jan 0001 000000")]
         public void GetNewFileName(string fileName, string folderDestination, string expected)
         {
             var fileInfo = Substitute.For<IReadonlyFileInfo>();
