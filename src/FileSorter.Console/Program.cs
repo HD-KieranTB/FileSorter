@@ -3,11 +3,11 @@ using FileSorter.Business.DirectoryManagers;
 
 var strategies = new Dictionary<char, IDirectoryManager> 
 { 
-    { '1', new DateTimeDirectoryManager() },
+    { '1', new DateTimeDirectoryManager(new CrossPlatformPath()) },
     { '2', new AlphabetDirectoryManager(new CrossPlatformPath()) },
-    { '3', new FileTypeDirectoryManager() },
-    { '4', new FileExtensionDirectoryManager() },
-    { '5', new XboxDirectoryManager() }
+    { '3', new FileTypeDirectoryManager(new CrossPlatformPath()) },
+    { '4', new FileExtensionDirectoryManager(new CrossPlatformPath()) },
+    { '5', new XboxDirectoryManager(new CrossPlatformPath()) }
 };
 
 Console.WriteLine("Starting...");

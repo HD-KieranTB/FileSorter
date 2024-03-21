@@ -7,12 +7,12 @@ namespace FileSorter.UnitTest.DirectoryManagers
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _directoryManager = new FileExtensionDirectoryManager();
+            _directoryManager = new FileExtensionDirectoryManager(new CrossPlatformPath());
         }
 
         [TestCase(".pdf", "", "pdf")]
         [TestCase(".PDF", "", "pdf")]
-        [TestCase(".jpg", "Files", "Files\\jpg")]
+        [TestCase(".jpg", "Files", "Files/jpg")]
         public void GetFolderDestination(string extension, string destination, string expected)
         {
             var fileInfo = Substitute.For<IReadonlyFileInfo>();
@@ -24,7 +24,7 @@ namespace FileSorter.UnitTest.DirectoryManagers
         }
 
         [TestCase("FileNameA", "", "FileNameA")]
-        [TestCase("FileNameB", "Files\\pdf", "Files\\pdf\\FileNameB")]
+        [TestCase("FileNameB", "Files/pdf", "Files/pdf/FileNameB")]
         public void GetNewFileName(string fileName, string folderDestination, string expected)
         {
             var fileInfo = Substitute.For<IReadonlyFileInfo>();

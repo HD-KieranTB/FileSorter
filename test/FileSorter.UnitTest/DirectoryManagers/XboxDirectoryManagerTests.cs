@@ -7,13 +7,13 @@ namespace FileSorter.UnitTest.DirectoryManagers
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _directoryManager = new XboxDirectoryManager();
+            _directoryManager = new XboxDirectoryManager(new CrossPlatformPath());
         }
 
-        [TestCase("FileA", ".jpg", "", "FileA\\Screenshots")]
-        [TestCase("GameA-FileA", ".jpg", "", "GameA\\Screenshots")]
-        [TestCase("GameA-FileA", ".JPG", "", "GameA\\Screenshots")]
-        [TestCase("GameA-FileB", ".mp4", "Files", "Files\\GameA\\Clips")]
+        [TestCase("FileA", ".jpg", "", "FileA/Screenshots")]
+        [TestCase("GameA-FileA", ".jpg", "", "GameA/Screenshots")]
+        [TestCase("GameA-FileA", ".JPG", "", "GameA/Screenshots")]
+        [TestCase("GameA-FileB", ".mp4", "Files", "Files/GameA/Clips")]
         public void GetFolderDestination(string fileName, string extension, string destination, string expected)
         {
             var fileInfo = Substitute.For<IReadonlyFileInfo>();
@@ -26,7 +26,7 @@ namespace FileSorter.UnitTest.DirectoryManagers
         }
 
         [TestCase("FileNameA", "", "FileNameA")]
-        [TestCase("FileNameB", "Files\\Screenshots", "Files\\Screenshots\\FileNameB")]
+        [TestCase("FileNameB", "Files/Screenshots", "Files/Screenshots/FileNameB")]
         public void GetNewFileName(string fileName, string folderDestination, string expected)
         {
             var fileInfo = Substitute.For<IReadonlyFileInfo>();
