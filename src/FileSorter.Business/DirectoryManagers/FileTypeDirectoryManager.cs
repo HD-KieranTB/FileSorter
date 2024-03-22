@@ -2,6 +2,13 @@
 {
     public sealed class FileTypeDirectoryManager : IDirectoryManager
     {
+        private readonly IPath _path;
+
+        public FileTypeDirectoryManager(IPath path)
+        {
+            _path = path;
+        }
+
         public string GetFolderDestination(string destination, IReadonlyFileInfo fileInfo)
         {
             var folder = "Other";
@@ -27,12 +34,12 @@
                 folder = "Archive";
             }
 
-            return Path.Combine(destination, folder);
+            return _path.Combine(destination, folder);
         }
 
         public string GetNewFileName(string folderDestination, IReadonlyFileInfo fileInfo)
         {
-            return Path.Combine(folderDestination, Path.GetFileName(fileInfo.FullName));
+            return _path.Combine(folderDestination, Path.GetFileName(fileInfo.FullName));
         }
     }
 }

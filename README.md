@@ -1,7 +1,7 @@
 <h1 align="center">File Sorter</h1>
-<h3 align="center">The Free Software File Sorter</h3>
+<h3 align="center">The Free Cross-Platform File Sorter</h3>
 
-File Sorter provides various strategies for automatically sorting files
+This file sorter provides various strategies for automatically sorting files.
 
 <h4 align="center">Current use cases</h3>
 
