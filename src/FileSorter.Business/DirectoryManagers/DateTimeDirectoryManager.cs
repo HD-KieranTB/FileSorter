@@ -2,15 +2,22 @@
 {
     public sealed class DateTimeDirectoryManager : IDirectoryManager
     {
+        private readonly IPath _path;
+
+        public DateTimeDirectoryManager(IPath path)
+        {
+            _path = path;
+        }
+
         public string GetFolderDestination(string destination, IReadonlyFileInfo fileInfo)
         {
             var folder = fileInfo.LastWriteTime.Year.ToString();
-            return Path.Combine(destination, folder);
+            return _path.Combine(destination, folder);
         }
 
         public string GetNewFileName(string folderDestination, IReadonlyFileInfo fileInfo)
         {
-            return Path.Combine(folderDestination, $"{fileInfo.LastWriteTime:dd MMM yyyy HHmmss} [{fileInfo.Name}]{fileInfo.Extension}");
+            return _path.Combine(folderDestination, $"{fileInfo.LastWriteTime:dd MMM yyyy HHmmss} [{fileInfo.Name}]{fileInfo.Extension}");
         }
     }
 }

@@ -4,6 +4,13 @@ namespace FileSorter.Business.DirectoryManagers
 {
     public sealed class XboxDirectoryManager : IDirectoryManager
     {
+        private readonly IPath _path;
+
+        public XboxDirectoryManager(IPath path)
+        {
+            _path = path;
+        }
+
         public string GetFolderDestination(string destination, IReadonlyFileInfo fileInfo)
         {
             var gameAndDate = fileInfo.Name.Split('-');
@@ -17,12 +24,12 @@ namespace FileSorter.Business.DirectoryManagers
                 subFolder = "Screenshots";
             }
             var combined = Path.Combine(gamePart, subFolder);
-            return Path.Combine(destination, combined);
+            return _path.Combine(destination, combined);
         }
 
         public string GetNewFileName(string folderDestination, IReadonlyFileInfo fileInfo)
         {
-            return Path.Combine(folderDestination, Path.GetFileName(fileInfo.FullName));
+            return _path.Combine(folderDestination, Path.GetFileName(fileInfo.FullName));
         }
     }
 }

@@ -7,11 +7,11 @@ namespace FileSorter.UnitTest.DirectoryManagers
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _directoryManager = new DateTimeDirectoryManager();
+            _directoryManager = new DateTimeDirectoryManager(new CrossPlatformPath());
         }
 
         [TestCase(2005, "", "2005")]
-        [TestCase(1988, "Files", "Files\\1988")]
+        [TestCase(1988, "Files", "Files/1988")]
         public void GetFolderDestination(int year, string destination, string expected)
         {
             var date = new DateTime(year, 1, 1);
@@ -24,7 +24,7 @@ namespace FileSorter.UnitTest.DirectoryManagers
         }
 
         [TestCase(1988, 5, 7, "FileNameA", ".pdf", "", "07 May 1988 000000 [FileNameA].pdf")]
-        [TestCase(2023, 12, 31, "FileNameB", ".pdf", "Files", "Files\\31 Dec 2023 000000 [FileNameB].pdf")]
+        [TestCase(2023, 12, 31, "FileNameB", ".pdf", "Files", "Files/31 Dec 2023 000000 [FileNameB].pdf")]
         public void GetNewFileName(int year, int month, int day, string fileName, string extension, string folderDestination, string expected)
         {
             var date = new DateTime(year, month, day);
