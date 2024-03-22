@@ -1,13 +1,15 @@
 ﻿using FileSorter.Business;
 using FileSorter.Business.DirectoryManagers;
 
+var path = new CrossPlatformPath();
 var strategies = new Dictionary<char, IDirectoryManager> 
 { 
-    { '1', new DateTimeDirectoryManager(new CrossPlatformPath()) },
-    { '2', new AlphabetDirectoryManager(new CrossPlatformPath()) },
-    { '3', new FileTypeDirectoryManager(new CrossPlatformPath()) },
-    { '4', new FileExtensionDirectoryManager(new CrossPlatformPath()) },
-    { '5', new XboxDirectoryManager(new CrossPlatformPath()) }
+    { '1', new DateTimeDirectoryManager(path) },
+    { '2', new AlphabetDirectoryManager(path) },
+    { '3', new FileTypeDirectoryManager(path) },
+    { '4', new FileExtensionDirectoryManager(path) },
+    { '5', new XboxDirectoryManager(path) },
+    { '6', new LibraryDirectoryManager(path) }
 };
 
 Console.WriteLine("Starting...");
@@ -18,7 +20,8 @@ var menu =
  2 --> AlphabetDirectoryManager
  3 --> FileTypeDirectoryManager
  4 --> FileExtensionDirectoryManager
- 5 --> XboxDirectoryManager";
+ 5 --> XboxDirectoryManager
+ 6 --> LibraryDirectoryManager";
 
 Console.WriteLine(menu);
 
@@ -40,7 +43,7 @@ async Task<bool> Sort()
 
         ArgumentException.ThrowIfNullOrEmpty(source);
         ArgumentException.ThrowIfNullOrEmpty(destination);
-
+        
         var files = Directory.GetFiles(source, "*.*", SearchOption.AllDirectories);
 
         FileDirectory.CreateDirectoryIfNew(destination);
