@@ -3,6 +3,14 @@
 
 This file sorter provides various strategies for automatically sorting files.
 
+##### Table of Contents 
+[Sort by Date](#Sort by Date)
+[Sort by Alphabet](#Sort by Alphabet)
+[Sort by File Type](#Sort by File Type)
+[Sort by File Extension](#Sort by File Extension)
+[Sort Xbox Files](#Sort Xbox Files)
+[Sort Books](#Sort Books)
+
 <h4 align="center">Current use cases</h3>
 
 Consider the following directory and files:
@@ -17,6 +25,7 @@ Consider the following directory and files:
   └── BFileThree.pdf (11/20/2022)
 ```
 
+### Sort by Date
 <strong>Sort the files by the date and time they were last edited using the DateTimeDirectoryManager.</strong>
 
 ```bash
@@ -29,6 +38,7 @@ Consider the following directory and files:
       └── 24 Dec 2023 [AFileOne].jpg        
 ```
 
+### Sort by Alphabet
 <strong>Sort the files into alphabetical folders using the AlphabetDirectoryManager.</strong>
 
 ```bash
@@ -41,6 +51,7 @@ Consider the following directory and files:
       └── BFileTwo.mp3   
 ```
 
+### Sort by File Type
 <strong>Sort the files into folders by category using the FileTypeDirectoryManager.</strong>
 
 ```bash
@@ -55,6 +66,7 @@ Consider the following directory and files:
       └── BFileThree.pdf
 ```
 
+### Sort by File Extension
 <strong>Sort the files into folders by extension type using the FileExtensionDirectoryManager.</strong>
 
 ```bash
@@ -81,6 +93,7 @@ Consider the following directory and files:
       └── ARK_Survival Evolved-2016_01_16-21_19_42.jpg  
 ```
 
+### Sort Xbox Files
 <strong>Sort files originating from xbox using the XboxDirectoryManager.</strong>
 
 ```bash
@@ -94,4 +107,41 @@ Files
   └── ARK Survival Evolved
       └── Screenshots
           └── ARK_Survival Evolved-2016_01_16-21_19_42.jpg
+```
+
+Consider the following directory and files:
+
+```bash
+  Files
+  ├── Docs
+  │   ├── Author A - Title A.pdf
+  │   └── Title C.pdf
+  │ 
+  └── Research
+      ├── Author B - Title A.pdf
+      ├── Author B - Title A.png
+      └── Author B - Title B.pdf
+```
+
+### Sort Books
+<strong>Sort books into folders by author using the LibraryDirectoryManager.</strong>
+
+```bash
+Files
+  └── Books
+       ├── Author A
+       │   └── Author A - Title A
+       │	└── Author A - Title A.pdf
+       │       
+       ├── Author B
+       │    ├── Author B - Title A
+       │    │	├── Author B - Title A.pdf
+       │    │	└── Author B - Title A.png
+       │    └── Author B - Title B
+       │	└── Author B - Title B.pdf
+       │
+       └── Unknown Author
+           └── Title C
+		└── Title C.pdf
+
 ```
