@@ -20,12 +20,12 @@ namespace FileSorter.Console
         private static readonly string __options = 
             @$"Select a sorting strategy ({string.Join(", ", __strategies.Keys)}):
 
-    1 --> DateTimeDirectoryManager
-    2 --> AlphabetDirectoryManager
-    3 --> FileTypeDirectoryManager
-    4 --> FileExtensionDirectoryManager
-    5 --> XboxDirectoryManager
-    6 --> LibraryDirectoryManager";
+    1 --> Sort by Date
+    2 --> Sort by Alphabet
+    3 --> Sort by File Type
+    4 --> Sort by File Extension
+    5 --> Sort Xbox File
+    6 --> Sort Books";
 
         public static void PrintOptions()
         {
