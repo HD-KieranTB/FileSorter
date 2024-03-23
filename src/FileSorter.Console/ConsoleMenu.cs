@@ -54,7 +54,7 @@ namespace FileSorter.Console
                     var files = Directory.GetFiles(source, "*.*", SearchOption.AllDirectories);
 
                     FileDirectory.CreateDirectoryIfNew(destination);
-                    var organiser = new DirectoryOrganiser(strategy, new FileStreamFactory());
+                    var organiser = new DirectoryOrganiser(strategy, new FileStreamFactory(), new DirectoryOrganiserConsoleView());
                     await organiser.Organise(files, destination);
 
                     System.Console.WriteLine();
