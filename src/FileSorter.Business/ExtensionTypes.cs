@@ -1,6 +1,6 @@
 ﻿namespace FileSorter.Business
 {
-    internal static class ExtensionTypes
+    public static class ExtensionTypes
     {
         public static readonly string[] IMAGE_EXTENSIONS =
                [".png",

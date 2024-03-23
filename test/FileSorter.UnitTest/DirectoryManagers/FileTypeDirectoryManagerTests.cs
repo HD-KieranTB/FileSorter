@@ -10,20 +10,22 @@ namespace FileSorter.UnitTest.DirectoryManagers
             _directoryManager = new FileTypeDirectoryManager(new CrossPlatformPath());
         }
 
-        [TestCase("FileType", "", "", "Other")]
-        [TestCase("FileType", ".jpg", "", "Images")]
-        [TestCase("FileType", ".mp4", "", "Videos")]
-        [TestCase("FileType", ".mp3", "", "Sounds")]
-        [TestCase("FileType", ".pdf", "", "Documents")]
-        [TestCase("FileType", ".zip", "", "Archive")]
-        [TestCase("FileType", ".ZIP", "", "Archive")]
-        [TestCase("FileType", "", "Files", "Files/Other")]
-        [TestCase("FileType", ".jpg", "Files", "Files/Images")]
-        [TestCase("FileType", ".mp4", "Files", "Files/Videos")]
-        [TestCase("FileType", ".mp3", "Files", "Files/Sounds")]
-        [TestCase("FileType", ".pdf", "Files", "Files/Documents")]
-        [TestCase("FileType", ".zip", "Files", "Files/Archive")]
-        [TestCase("FileType", ".ZIP", "Files", "Files/Archive")]
+        [TestCase("FileName", "", "", "Other")]
+        [TestCase("FileName", ".jpg", "", "Images")]
+        [TestCase("FileName", ".mp4", "", "Videos")]
+        [TestCase("FileName", ".mp3", "", "Sounds")]
+        [TestCase("FileName", ".pdf", "", "Documents")]
+        [TestCase("FileName", ".zip", "", "Archive")]
+        [TestCase("FileName", ".ZIP", "", "Archive")]
+        [TestCase("FileName", "", "Destination", "Destination/Other")]
+        [TestCase("FileName", ".jpg", "Destination", "Destination/Images")]
+        [TestCase("FileName", ".mp4", "Destination", "Destination/Videos")]
+        [TestCase("FileName", ".mp3", "Destination", "Destination/Sounds")]
+        [TestCase("FileName", ".pdf", "Destination", "Destination/Documents")]
+        [TestCase("FileName", ".zip", "Destination", "Destination/Archive")]
+        [TestCase("FileName", ".ZIP", "Destination", "Destination/Archive")]
+        [TestCase("FileName", ".ZIP", "Destination", "Destination/Archive")]
+        [TestCase("FileName.zip", ".ZIP", "Destination", "Destination/Archive")]
         public void GetFolderDestination(string fileName, string extension, string destination, string expected)
         {
             var fileInfo = Substitute.For<IReadonlyFileInfo>();
@@ -35,12 +37,104 @@ namespace FileSorter.UnitTest.DirectoryManagers
             Assert.That(actual, Is.EqualTo(expected));
         }
 
-        [TestCase("FileType", "", "FileType")]
-        [TestCase("FileType", "Files", "Files/FileType")]
-        public void GetNewFileName(string fileName, string folderDestination, string expected)
+        [Test]
+        public void GetFolderDestination_Images([ValueSource(nameof(GetImageExtensions))] string imageExtension)
+        {
+            var expected = "Images";
+            var fileInfo = Substitute.For<IReadonlyFileInfo>();
+            fileInfo.Extension.Returns(imageExtension);
+
+            var actual = _directoryManager.GetFolderDestination(string.Empty, fileInfo);
+
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        private static IEnumerable<string> GetImageExtensions()
+        {
+            return ExtensionTypes.IMAGE_EXTENSIONS;
+        }
+
+        [Test]
+        public void GetFolderDestination_Videos([ValueSource(nameof(GetVideoExtensions))] string imageExtension)
+        {
+            var expected = "Videos";
+            var fileInfo = Substitute.For<IReadonlyFileInfo>();
+            fileInfo.Extension.Returns(imageExtension);
+
+            var actual = _directoryManager.GetFolderDestination(string.Empty, fileInfo);
+
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        private static IEnumerable<string> GetVideoExtensions()
+        {
+            return ExtensionTypes.VIDEO_EXTENSIONS;
+        }
+
+        [Test]
+        public void GetFolderDestination_Sounds([ValueSource(nameof(GetSoundExtensions))] string imageExtension)
+        {
+            var expected = "Sounds";
+            var fileInfo = Substitute.For<IReadonlyFileInfo>();
+            fileInfo.Extension.Returns(imageExtension);
+
+            var actual = _directoryManager.GetFolderDestination(string.Empty, fileInfo);
+
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        private static IEnumerable<string> GetSoundExtensions()
+        {
+            return ExtensionTypes.SOUND_EXTENSIONS;
+        }
+
+        [Test]
+        public void GetFolderDestination_Documents([ValueSource(nameof(GetDocumentExtensions))] string imageExtension)
+        {
+            var expected = "Documents";
+            var fileInfo = Substitute.For<IReadonlyFileInfo>();
+            fileInfo.Extension.Returns(imageExtension);
+
+            var actual = _directoryManager.GetFolderDestination(string.Empty, fileInfo);
+
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        private static IEnumerable<string> GetDocumentExtensions()
+        {
+            return ExtensionTypes.DOCUMENT_EXTENSIONS;
+        }
+
+        [Test]
+        public void GetFolderDestination_Archive([ValueSource(nameof(GetArchiveExtensions))] string imageExtension)
+        {
+            var expected = "Archive";
+            var fileInfo = Substitute.For<IReadonlyFileInfo>();
+            fileInfo.Extension.Returns(imageExtension);
+
+            var actual = _directoryManager.GetFolderDestination(string.Empty, fileInfo);
+
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        private static IEnumerable<string> GetArchiveExtensions()
+        {
+            return ExtensionTypes.ARCHIVE_EXTENSIONS;
+        }
+
+        [TestCase("FileNameA", "FileNameA", "", "FileNameA")]
+        [TestCase("FileNameA.pdf", "FileNameA", "", "FileNameA")]
+        [TestCase("FileNameA.pdf", "FileNameA.pdf", "", "FileNameA.pdf")]
+        [TestCase("FileNameA", "FileNameA.pdf", "", "FileNameA.pdf")]
+        [TestCase("FileNameB", "Source/FileNameB", "Destination/Books/FileNameB", "Destination/Books/FileNameB/FileNameB")]
+        [TestCase("FileNameB.pdf", "Source/FileNameB", "Destination/Books/FileNameB", "Destination/Books/FileNameB/FileNameB")]
+        [TestCase("FileNameB.pdf", "Source/FileNameB.pdf", "Destination/Books/FileNameB", "Destination/Books/FileNameB/FileNameB.pdf")]
+        [TestCase("FileNameB", "Source/FileNameB.pdf", "Destination/Books/FileNameB", "Destination/Books/FileNameB/FileNameB.pdf")]
+        public void GetNewFileName(string fileName, string fileFullName, string folderDestination, string expected)
         {
             var fileInfo = Substitute.For<IReadonlyFileInfo>();
-            fileInfo.FullName.Returns(fileName);
+            fileInfo.Name.Returns(fileName);
+            fileInfo.FullName.Returns(fileFullName);
 
             var actual = _directoryManager.GetNewFileName(folderDestination, fileInfo);
 

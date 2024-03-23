@@ -25,12 +25,19 @@ namespace FileSorter.UnitTest.DirectoryManagers
             Assert.That(actual, Is.EqualTo(expected));
         }
 
-        [TestCase("FileNameA", "", "FileNameA")]
-        [TestCase("FileNameB", "Files/Screenshots", "Files/Screenshots/FileNameB")]
-        public void GetNewFileName(string fileName, string folderDestination, string expected)
+        [TestCase("FileNameA", "FileNameA", "", "FileNameA")]
+        [TestCase("FileNameA.pdf", "FileNameA", "", "FileNameA")]
+        [TestCase("FileNameA.pdf", "FileNameA.pdf", "", "FileNameA.pdf")]
+        [TestCase("FileNameA", "FileNameA.pdf", "", "FileNameA.pdf")]
+        [TestCase("FileNameB", "Source/FileNameB", "Destination/Books/FileNameB", "Destination/Books/FileNameB/FileNameB")]
+        [TestCase("FileNameB.pdf", "Source/FileNameB", "Destination/Books/FileNameB", "Destination/Books/FileNameB/FileNameB")]
+        [TestCase("FileNameB.pdf", "Source/FileNameB.pdf", "Destination/Books/FileNameB", "Destination/Books/FileNameB/FileNameB.pdf")]
+        [TestCase("FileNameB", "Source/FileNameB.pdf", "Destination/Books/FileNameB", "Destination/Books/FileNameB/FileNameB.pdf")]
+        public void GetNewFileName(string fileName, string fileFullName, string folderDestination, string expected)
         {
             var fileInfo = Substitute.For<IReadonlyFileInfo>();
-            fileInfo.FullName.Returns(fileName);
+            fileInfo.Name.Returns(fileName);
+            fileInfo.FullName.Returns(fileFullName);
 
             var actual = _directoryManager.GetNewFileName(folderDestination, fileInfo);
 

@@ -17,7 +17,7 @@
 
         public string GetNewFileName(string folderDestination, IReadonlyFileInfo fileInfo)
         {
-            return _path.Combine(folderDestination, $"{fileInfo.LastWriteTime:dd MMM yyyy HHmmss} [{fileInfo.Name}]{fileInfo.Extension}");
+            return _path.Combine(folderDestination, $"{fileInfo.LastWriteTime:dd MMM yyyy HHmmss} [{Path.GetFileNameWithoutExtension(fileInfo.Name)}]{fileInfo.Extension}");
         }
     }
 }
