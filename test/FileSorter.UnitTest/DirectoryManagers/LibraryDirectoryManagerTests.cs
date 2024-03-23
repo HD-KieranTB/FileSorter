@@ -1,22 +1,28 @@
 namespace FileSorter.UnitTest.DirectoryManagers
 {
-    internal sealed class FileExtensionDirectoryManagerTests
+    internal sealed class LibraryDirectoryManagerTests
     {
-        private FileExtensionDirectoryManager _directoryManager = null!;
+        private LibraryDirectoryManager _directoryManager = null!;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _directoryManager = new FileExtensionDirectoryManager(new CrossPlatformPath());
+            _directoryManager = new LibraryDirectoryManager(new CrossPlatformPath());
         }
 
-        [TestCase(".pdf", "", "pdf")]
-        [TestCase(".PDF", "", "pdf")]
-        [TestCase(".jpg", "Destination", "Destination/jpg")]
-        public void GetFolderDestination(string extension, string destination, string expected)
+        [TestCase("Author - Book title", "Source/Author - Book title", "Destination", "Destination/Books/Author/Author - Book title")]
+        [TestCase("Author - Book title.pdf", "Source/Author - Book title", "Destination", "Destination/Books/Author/Author - Book title")]
+        [TestCase("Author - Book title.pdf", "Source/Author - Book title.pdf", "Destination", "Destination/Books/Author/Author - Book title")]
+        [TestCase("Author - Book title", "Source/Author - Book title.pdf", "Destination", "Destination/Books/Author/Author - Book title")]
+        [TestCase("Book title", "Source/Book title", "Destination", "Destination/Books/UnknownAuthor/Book title")]
+        [TestCase("Book title.pdf", "Source/Book title", "Destination", "Destination/Books/UnknownAuthor/Book title")]
+        [TestCase("Book title.pdf", "Source/Book title.pdf", "Destination", "Destination/Books/UnknownAuthor/Book title")]
+        [TestCase("Book title", "Source/Book title.pdf", "Destination", "Destination/Books/UnknownAuthor/Book title")]
+        public void GetFolderDestination(string fileName, string fullFileName, string destination, string expected)
         {
             var fileInfo = Substitute.For<IReadonlyFileInfo>();
-            fileInfo.Extension.Returns(extension);
+            fileInfo.Name.Returns(fileName);
+            fileInfo.FullName.Returns(fullFileName);
 
             var actual = _directoryManager.GetFolderDestination(destination, fileInfo);
 

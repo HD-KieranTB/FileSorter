@@ -6,36 +6,46 @@ namespace FileSorter.Business
     {
         private readonly IDirectoryManager _directoryManager;
         private readonly IStreamFactory _streamFactory;
+        private readonly IDirectoryOrganiserView _view;
 
-        public DirectoryOrganiser(IDirectoryManager directoryManager, IStreamFactory streamFactory)
+        public DirectoryOrganiser(IDirectoryManager directoryManager, IStreamFactory streamFactory, IDirectoryOrganiserView view)
         {
             _directoryManager = directoryManager;
             _streamFactory = streamFactory;
+            _view = view;
         }
 
         public async Task Organise(string[] files, string destination)
         {
+            var showWarning = false;
             await Parallel.ForEachAsync(files, async (file, token) =>
             {
                 var fileInfo = new ReadonlyFileInfo(new FileInfo(file));
-                await Console.Out.WriteLineAsync($"Copying: '{fileInfo.Name}'. Size: '{fileInfo.Length}'.");
+                await _view.ShowStartCopy(fileInfo);
 
                 var folderDestination = _directoryManager.GetFolderDestination(destination, fileInfo);
 
                 var newName = _directoryManager.GetNewFileName(folderDestination, fileInfo);
-                if (File.Exists(newName))
-                {
-                    return;
-                }
+                if (File.Exists(newName)) return;
 
                 FileDirectory.CreateDirectoryIfNew(folderDestination);
 
-                using var sourceStream = _streamFactory.CreateSourceStream(file);
-                    using var destinationStream = _streamFactory.CreateDestinationStream(newName);
-                        await sourceStream.CopyToAsync(destinationStream, token);
+                try
+                {
+                    using var sourceStream = _streamFactory.CreateSourceStream(file);
+                        using var destinationStream = _streamFactory.CreateDestinationStream(newName);
+                            await sourceStream.CopyToAsync(destinationStream, token);
+                }
+                catch (IOException)
+                {
+                    await _view.ShowDuplicateError(fileInfo);
+                    showWarning = true;
+                }
 
-                await Console.Out.WriteLineAsync($"Finished copying: '{fileInfo.Name}'. Size: '{fileInfo.Length}'.");
+                await _view.ShowEndCopy(fileInfo);
             });
+
+            if (showWarning) await _view.ShowWarning();
         }
     }
 }

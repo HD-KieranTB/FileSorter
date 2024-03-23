@@ -15,11 +15,12 @@ namespace FileSorter.UnitTest.DirectoryManagers
         [TestCase("*abc", "", "Other")]
         [TestCase("_", "", "Other")]
         [TestCase("999", "", "Other")]
-        [TestCase("Alphabet", "Files", "Files/A")]
-        [TestCase("alphabet", "Files", "Files/A")]
-        [TestCase("*abc", "Files", "Files/Other")]
-        [TestCase("_", "Files", "Files/Other")]
-        [TestCase("999", "Files", "Files/Other")]
+        [TestCase("Alphabet", "Destination", "Destination/A")]
+        [TestCase("alphabet", "Destination", "Destination/A")]
+        [TestCase("alphabet.pdf", "Destination", "Destination/A")]
+        [TestCase("*abc", "Destination", "Destination/Other")]
+        [TestCase("_", "Destination", "Destination/Other")]
+        [TestCase("999", "Destination", "Destination/Other")]
         public void GetFolderDestination(string fileName, string destination, string expected)
         {
             var fileInfo = Substitute.For<IReadonlyFileInfo>();
@@ -30,12 +31,19 @@ namespace FileSorter.UnitTest.DirectoryManagers
             Assert.That(actual, Is.EqualTo(expected));
         }
 
-        [TestCase("Alphabet", "", "Alphabet 01 Jan 0001 000000")]
-        [TestCase("Alphabet", "Files", "Files/Alphabet 01 Jan 0001 000000")]
-        public void GetNewFileName(string fileName, string folderDestination, string expected)
+        [TestCase("FileNameA", "FileNameA", "", "FileNameA")]
+        [TestCase("FileNameA.pdf", "FileNameA", "", "FileNameA")]
+        [TestCase("FileNameA.pdf", "FileNameA.pdf", "", "FileNameA.pdf")]
+        [TestCase("FileNameA", "FileNameA.pdf", "", "FileNameA.pdf")]
+        [TestCase("FileNameB", "Source/FileNameB", "Destination/Books/FileNameB", "Destination/Books/FileNameB/FileNameB")]
+        [TestCase("FileNameB.pdf", "Source/FileNameB", "Destination/Books/FileNameB", "Destination/Books/FileNameB/FileNameB")]
+        [TestCase("FileNameB.pdf", "Source/FileNameB.pdf", "Destination/Books/FileNameB", "Destination/Books/FileNameB/FileNameB.pdf")]
+        [TestCase("FileNameB", "Source/FileNameB.pdf", "Destination/Books/FileNameB", "Destination/Books/FileNameB/FileNameB.pdf")]
+        public void GetNewFileName(string fileName, string fileFullName, string folderDestination, string expected)
         {
             var fileInfo = Substitute.For<IReadonlyFileInfo>();
-            fileInfo.FullName.Returns(fileName);
+            fileInfo.Name.Returns(fileName);
+            fileInfo.FullName.Returns(fileFullName);
 
             var actual = _directoryManager.GetNewFileName(folderDestination, fileInfo);
 
