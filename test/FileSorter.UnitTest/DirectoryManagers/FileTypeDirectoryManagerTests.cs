@@ -49,7 +49,7 @@ namespace FileSorter.UnitTest.DirectoryManagers
             Assert.That(actual, Is.EqualTo(expected));
         }
 
-        private static IEnumerable<string> GetImageExtensions()
+        private static string[] GetImageExtensions()
         {
             return ExtensionTypes.IMAGE_EXTENSIONS;
         }
@@ -66,7 +66,7 @@ namespace FileSorter.UnitTest.DirectoryManagers
             Assert.That(actual, Is.EqualTo(expected));
         }
 
-        private static IEnumerable<string> GetVideoExtensions()
+        private static string[] GetVideoExtensions()
         {
             return ExtensionTypes.VIDEO_EXTENSIONS;
         }
@@ -83,7 +83,7 @@ namespace FileSorter.UnitTest.DirectoryManagers
             Assert.That(actual, Is.EqualTo(expected));
         }
 
-        private static IEnumerable<string> GetSoundExtensions()
+        private static string[] GetSoundExtensions()
         {
             return ExtensionTypes.SOUND_EXTENSIONS;
         }
@@ -100,7 +100,7 @@ namespace FileSorter.UnitTest.DirectoryManagers
             Assert.That(actual, Is.EqualTo(expected));
         }
 
-        private static IEnumerable<string> GetDocumentExtensions()
+        private static string[] GetDocumentExtensions()
         {
             return ExtensionTypes.DOCUMENT_EXTENSIONS;
         }
@@ -117,7 +117,7 @@ namespace FileSorter.UnitTest.DirectoryManagers
             Assert.That(actual, Is.EqualTo(expected));
         }
 
-        private static IEnumerable<string> GetArchiveExtensions()
+        private static string[] GetArchiveExtensions()
         {
             return ExtensionTypes.ARCHIVE_EXTENSIONS;
         }
