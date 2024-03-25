@@ -18,6 +18,11 @@ jobs:
         operating-system: [windows-latest]   
 
     steps:
+    - name: Build with dotnet
+      run: dotnet build --configuration Release
+    - name: dotnet publish
+      run: |
+        dotnet publish -c Release -o FileSorter.Console
     - name: List Directory
       run: ls -R
     - name: Publish
