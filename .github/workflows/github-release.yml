@@ -6,51 +6,12 @@ on:
 name: github release
 
 jobs:
-  build:
-    runs-on: ${{ matrix.operating-system }}
-    
-    strategy:
-      matrix:
-        operating-system: [ubuntu-latest]
-        
-    steps:
-    - uses: actions/checkout@v4
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore --configuration Release
-    - name: Upload build artifact
-      uses: actions/upload-artifact@main
-      with:
-        name: Build artifact
-        path: ./test/FileSorter.UnitTest/bin/Release/
-        if-no-files-found: error
+  build-and-unit-test:
+    uses: ./.github/workflows/dotnet.yml
  
-  test:
-    runs-on: ${{ matrix.operating-system }}
-    needs: build
-    
-    strategy:
-      matrix:
-        operating-system: [ubuntu-latest, windows-latest, macos-latest]    
-
-    steps:
-      - name: Download build artifact
-        uses: actions/download-artifact@main
-        with:
-          name: Build artifact
-      - name: Test build artifact download
-        run: ls -R
-      - name: Test
-        run: dotnet test */FileSorter.UnitTest.dll --no-build --verbosity normal
-
   publish:
     runs-on: ${{ matrix.operating-system }}
-    needs: test
+    needs: build-and-unit-test
     
     strategy:
       matrix:
@@ -58,4 +19,4 @@ jobs:
 
     steps:
     - name: Publish
-      run: dotnet publish --configuration Release --no-restore --verbosity normal --output \dist src\FileSorter.Console\FileSorter.Console.csproj
+      run: dotnet publish --configuration Release --no-restore --verbosity normal --output \dist ./src/FileSorter.Console/FileSorter.Console.csproj
