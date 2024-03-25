@@ -7,7 +7,7 @@ name: github release
 
 jobs:
   build-and-unit-test:
-    uses: ./.github/workflows/dotnet.yml
+    uses: ./.github/workflows/build-and-unit-test.yml
  
   publish:
     runs-on: ${{ matrix.operating-system }}
