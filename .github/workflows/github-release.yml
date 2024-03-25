@@ -48,12 +48,14 @@ jobs:
       - name: Test
         run: dotnet test */FileSorter.UnitTest.dll --no-build --verbosity normal
 
-    publish:
-      runs-on: ${{ matrix.operating-system }}
-      needs: test
-      
-      strategy:
-        matrix:
-          operating-system: [windows-latest]    
-      - name: Publish
-        run: dotnet publish --configuration Release --no-restore --verbosity normal --output \dist src\FileSorter.Console\FileSorter.Console.csproj
+  publish:
+    runs-on: ${{ matrix.operating-system }}
+    needs: test
+    
+    strategy:
+      matrix:
+        operating-system: [windows-latest]   
+
+    steps:
+    - name: Publish
+      run: dotnet publish --configuration Release --no-restore --verbosity normal --output \dist src\FileSorter.Console\FileSorter.Console.csproj
