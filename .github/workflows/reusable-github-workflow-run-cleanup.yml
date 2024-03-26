@@ -1,0 +1,15 @@
+name: Clean up workflow runs
+
+on:
+  workflow_call:
+
+jobs:
+  clean-logs:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - uses: igorjs/gh-actions-clean-workflow@v4
+        with:
+          runs_to_keep: 2
+

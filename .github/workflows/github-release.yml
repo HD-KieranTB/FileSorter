@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-and-unit-test:
-    uses: ./.github/workflows/build-and-unit-test.yml
+    uses: ./.github/workflows/reusable-build-and-unit-test.yml
  
   publish:
     runs-on: ${{ matrix.operating-system }}
@@ -19,11 +19,6 @@ jobs:
         operating-system: [windows-latest]   
 
     steps:
-    - name: Build with dotnet
-      run: dotnet build --configuration Release
-    - name: dotnet publish
-      run: |
-        dotnet publish -c Release -o /FileSorter.Console
     - name: List Directory
       run: ls -R
     - name: Publish
