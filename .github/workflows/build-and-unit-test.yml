@@ -18,6 +18,7 @@ jobs:
       - uses: igorjs/gh-actions-clean-workflow@v4
         with:
           runs_to_keep: 2
+ 	  days_old: 0
 
   # cleanup-workflow-runlogs:
     # uses: ./.github/workflows/reusable-github-workflow-run-cleanup.yml
