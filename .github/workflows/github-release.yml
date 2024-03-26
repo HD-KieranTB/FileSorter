@@ -27,4 +27,4 @@ jobs:
     - name: List Directory
       run: ls -R
     - name: Publish
-      run: dotnet publish --configuration Release --no-restore --verbosity normal --output \dist
+      run: dotnet publish --configuration Release --no-restore --verbosity normal --output /dist ./src/FileSorter.Console/FileSorter.Console.csproj
