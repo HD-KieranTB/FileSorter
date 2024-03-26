@@ -7,8 +7,8 @@ on:
     branches: [ "**" ]
 
 jobs:
-  build-and-unit-test:
-    uses: ./.github/workflows/reusable-build-and-unit-test.yml
+  # build-and-unit-test:
+    # uses: ./.github/workflows/reusable-build-and-unit-test.yml
  
   publish:
     runs-on: ${{ matrix.operating-system }}

@@ -10,4 +10,4 @@ jobs:
   build-and-unit-test:
     uses: ./.github/workflows/reusable-build-and-unit-test.yml
   cleanup-workflow-runlogs:
-    uses: ./.github/workflows/reusable-build-and-unit-test.yml
+    uses: ./.github/workflows/reusable-github-workflow-run-cleanup.yml
