@@ -26,12 +26,7 @@ jobs:
         name: Solution artifact
     - name: Test solution artifact download
       run: ls -R
-    - uses: actions/checkout@v4
-    - name: List Directory
-      run: ls -R
-    - name: Restore dependencies
-      run: dotnet restore
     - name: Publish
-      run: dotnet publish --configuration Release --no-restore --verbosity normal --output /dist D:\a\file-sorter\file-sorter\src\FileSorter.Console\FileSorter.Console.csproj
+      run: dotnet publish --configuration Release --no-build --verbosity normal --output /dist ./src/FileSorter.Console/FileSorter.Console.csproj
 
 
