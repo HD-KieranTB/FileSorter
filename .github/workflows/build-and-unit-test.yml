@@ -11,6 +11,8 @@ jobs:
     uses: ./.github/workflows/reusable-build-and-unit-test.yml
   cleanup-workflow-run-logs:
     uses: ./.github/workflows/reusable-github-workflow-run-cleanup.yml
+    permissions:
+      actions: write
     with:
       days_old: 0
       runs_to_keep: 2
