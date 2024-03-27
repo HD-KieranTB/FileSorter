@@ -23,6 +23,8 @@ jobs:
     - uses: actions/checkout@v4
     - name: List Directory
       run: ls -R
+    - name: Restore dependencies
+      run: dotnet restore
     - name: Publish
       run: dotnet publish --configuration Release --no-build --verbosity normal --output /dist D:\a\file-sorter\file-sorter\src\FileSorter.Console\FileSorter.Console.csproj
 
