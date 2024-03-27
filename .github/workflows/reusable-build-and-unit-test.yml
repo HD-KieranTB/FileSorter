@@ -24,6 +24,12 @@ jobs:
       run: dotnet build --no-restore --configuration Release
     - name: List Directory
       run: ls -R
+    - name: Upload solution artifact
+      uses: actions/upload-artifact@main
+      with:
+        name: Solution artifact
+        path: .
+        if-no-files-found: error
     - name: Upload build artifact
       uses: actions/upload-artifact@main
       with:

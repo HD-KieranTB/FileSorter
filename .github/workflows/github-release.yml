@@ -20,6 +20,12 @@ jobs:
         operating-system: [windows-latest]   
 
     steps:
+    - name: Download solution artifact
+      uses: actions/download-artifact@main
+      with:
+        name: Solution artifact
+    - name: Test solution artifact download
+      run: ls -R
     - uses: actions/checkout@v4
     - name: List Directory
       run: ls -R
