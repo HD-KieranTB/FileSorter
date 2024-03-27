@@ -20,10 +20,7 @@ jobs:
         operating-system: [windows-latest]   
 
     steps:
-    - name: Download build artifact
-      uses: actions/download-artifact@main
-      with:
-        name: Build artifact
+    - uses: actions/checkout@v4
     - name: List Directory
       run: ls -R
     - name: Publish
