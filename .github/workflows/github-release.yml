@@ -13,7 +13,8 @@ jobs:
 
   publish:
     runs-on: ${{ matrix.operating-system }}
-    
+    needs: build-and-unit-test
+
     strategy:
       matrix:
         operating-system: [windows-latest]   
