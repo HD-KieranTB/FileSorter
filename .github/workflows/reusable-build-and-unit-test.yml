@@ -53,4 +53,4 @@ jobs:
       - name: Test build artifact download
         run: ls -R
       - name: Test
-        run: dotnet test */FileSorter.UnitTest.dll --no-build --verbosity normal
+        run: dotnet test ./test/FileSorter.UnitTest/bin/Release/*/FileSorter.UnitTest.dll --no-build --verbosity normal
