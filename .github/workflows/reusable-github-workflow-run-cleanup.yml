@@ -2,6 +2,15 @@ name: Clean up workflow runs
 
 on:
   workflow_call:
+    inputs:
+      days_old:
+        description: "The amount of days old to delete"
+        default: "0"
+        required: false
+      runs_to_keep:
+        description: "The amount of latest workflows runs to keep"
+        default: "2"
+        required: false
 
 jobs:
   clean-logs:

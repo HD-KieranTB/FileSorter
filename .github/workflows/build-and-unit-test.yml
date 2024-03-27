@@ -9,19 +9,11 @@ on:
 jobs:
   build-and-unit-test:
     uses: ./.github/workflows/reusable-build-and-unit-test.yml
+  cleanup-workflow-run-logs:
+    uses: ./.github/workflows/reusable-github-workflow-run-cleanup.yml
+    with:
+      days_old: 0
+      runs_to_keep: 2
 
-  clean-logs:
-    runs-on: ubuntu-latest
-    needs: build-and-unit-test
-    permissions:
-      actions: write
-    steps:
-      - uses: igorjs/gh-actions-clean-workflow@v4
-        with:
-          days_old: "0"
-          runs_to_keep: "2"
-
-  # cleanup-workflow-runlogs:
-    # uses: ./.github/workflows/reusable-github-workflow-run-cleanup.yml
     # permissions:
       # actions: write
