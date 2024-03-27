@@ -26,6 +26,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Publish
-      run: dotnet publish --configuration Release --no-build --verbosity normal --output /dist D:\a\file-sorter\file-sorter\src\FileSorter.Console\FileSorter.Console.csproj
+      run: dotnet publish --configuration Release --no-restore --verbosity normal --output /dist D:\a\file-sorter\file-sorter\src\FileSorter.Console\FileSorter.Console.csproj
 
 
