@@ -46,10 +46,10 @@ jobs:
         operating-system: [ubuntu-latest, windows-latest, macos-latest]    
 
     steps:
-      - name: Download build artifact
+      - name: Download solution artifact
         uses: actions/download-artifact@main
         with:
-          name: Build artifact
+          name: Solution artifact
       - name: Test build artifact download
         run: ls -R
       - name: Test
