@@ -16,6 +16,3 @@ jobs:
     with:
       days_old: 0
       runs_to_keep: 2
-
-    # permissions:
-      # actions: write
