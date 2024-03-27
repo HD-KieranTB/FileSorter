@@ -30,12 +30,6 @@ jobs:
         name: Solution artifact
         path: .
         if-no-files-found: error
-    - name: Upload build artifact
-      uses: actions/upload-artifact@main
-      with:
-        name: Build artifact
-        path: ./test/FileSorter.UnitTest/bin/Release/
-        if-no-files-found: error
  
   test:
     runs-on: ${{ matrix.operating-system }}
@@ -50,7 +44,7 @@ jobs:
         uses: actions/download-artifact@main
         with:
           name: Solution artifact
-      - name: Test build artifact download
+      - name: Test solution artifact download
         run: ls -R
-      - name: Test
+      - name: Unit Test
         run: dotnet test ./test/FileSorter.UnitTest/bin/Release/*/FileSorter.UnitTest.dll --no-build --verbosity normal
