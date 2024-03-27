@@ -22,8 +22,6 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore --configuration Release
-    - name: List Directory
-      run: ls -R
     - name: Upload build artifact
       uses: actions/upload-artifact@main
       with:
