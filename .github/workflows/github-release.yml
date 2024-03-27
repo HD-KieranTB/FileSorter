@@ -8,6 +8,9 @@ on:
 
 jobs:
 
+  build-and-unit-test:
+    uses: ./.github/workflows/reusable-build-and-unit-test.yml
+
   publish:
     runs-on: ${{ matrix.operating-system }}
     
@@ -16,10 +19,13 @@ jobs:
         operating-system: [windows-latest]   
 
     steps:
+    - name: Download build artifact
+      uses: actions/download-artifact@main
+      with:
+        name: Build artifact
     - name: List Directory
       run: ls -R
     - name: Publish
       run: dotnet publish --configuration Release --no-restore --verbosity normal --output /dist FileSorter.sln
 
-  # build-and-unit-test:
-    # uses: ./.github/workflows/reusable-build-and-unit-test.yml
+
