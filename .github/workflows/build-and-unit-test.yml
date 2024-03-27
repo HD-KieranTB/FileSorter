@@ -14,5 +14,5 @@ jobs:
     permissions:
       actions: write
     with:
-      days_old: 0
-      runs_to_keep: 2
+      days_old: "0"
+      runs_to_keep: "2"
