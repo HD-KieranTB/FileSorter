@@ -27,7 +27,7 @@ jobs:
     - name: Test solution artifact download
       run: ls -R
     - name: Publish
-      run: dotnet publish --configuration Release --verbosity normal --output /dist ./src/FileSorter.Console/FileSorter.Console.csproj
+      run: dotnet publish --configuration Release --verbosity normal --output ./src ./src/FileSorter.Console/FileSorter.Console.csproj
     - name: Test publish
       run: ls -R
 
