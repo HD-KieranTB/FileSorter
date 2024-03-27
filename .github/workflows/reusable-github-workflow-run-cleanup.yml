@@ -5,10 +5,12 @@ on:
     inputs:
       days_old:
         description: "The amount of days old to delete"
+        type: string
         default: "0"
         required: false
       runs_to_keep:
         description: "The amount of latest workflows runs to keep"
+        type: string
         default: "2"
         required: false
 
